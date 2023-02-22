@@ -22,8 +22,39 @@ function cargarDatos() {
                 'edad': clientes[i].edad,
                 'altura': clientes[i].altura,
                 'peso': clientes[i].peso,
-                'actividad': clientes[i].actividad
+                'actividad': clientes[i].actividad,
+                'get': undefined,
+                'ger': undefined
             }
+            switch (nuevoCliente.actividad) {
+                case 'sedentaria':
+                    if (nuevoCliente.sexo == 'hombre') {
+                        coeficienteActividad = 1.3
+                    } else {
+                        coeficienteActividad = 1.3
+                    }
+                    break;
+                case 'moderada':
+                    if (nuevoCliente.sexo == 'hombre') {
+                        coeficienteActividad = 1.7
+                    } else {
+                        coeficienteActividad = 1.6
+                    }
+                    break;
+                case 'intensa':
+                    if (nuevoCliente.sexo == 'hombre') {
+                        coeficienteActividad = 2.1
+                    } else {
+                        coeficienteActividad = 1.9
+                    }
+                    break;
+            }
+            if (nuevoCliente.sexo == 'hombre') {
+                nuevoCliente.get = Math.round(66.473 + 13.751 * nuevoCliente.peso + 5.0033 * nuevoCliente.altura - 6.755 * nuevoCliente.edad)
+            } else {
+                nuevoCliente.get = Math.round(655.0955 + 9.463 * nuevoCliente.peso + 1.8496 * nuevoCliente.altura - 4.6756 * nuevoCliente.edad)
+            }
+            nuevoCliente.ger = Math.round(nuevoCliente.get * coeficienteActividad)
             listaClientes.push(nuevoCliente)
 
 
@@ -37,20 +68,58 @@ function escribirClientes() {
     console.log(listaClientes);
 }
 
-function addRow(tabla) {
-    // Obtiene una referencia a la tabla
-    var tableRef = document.getElementById(tabla);
+function pintarFilas() {
 
-    // Inserta una fila en la tabla, en el índice 0
-    var newRow = tableRef.insertRow(listaClientes.length - 1);
+    var tabla = document.getElementById('tabla')
 
-    // Inserta una celda en la fila, en el índice 0
-    for (let i = 0; i < 6; i++) {
-        var newCell = newRow.insertCell(i);
-        // Añade un nodo de texto a la celda
-        var newText = document.createTextNode('AA');
-        newCell.appendChild(newText);
+    for (let i = 0; i < listaClientes.length; i++) {
+        let cliente = listaClientes[i]
+        var fila = document.createElement("tr")
+        var celdaNombre = document.createElement("td")
+        var textNombre = document.createTextNode(cliente.nombre)
+        celdaNombre.appendChild(textNombre)
+        var celdaApellidos = document.createElement("td")
+        var textApellidos = document.createTextNode(cliente.apellidos)
+        celdaApellidos.appendChild(textApellidos)
+        var celdaSexo = document.createElement("td")
+        var textSexo = document.createTextNode(cliente.sexo)
+        celdaSexo.appendChild(textSexo)
+        var celdaEdad = document.createElement("td")
+        var textEdad = document.createTextNode(cliente.edad)
+        celdaEdad.appendChild(textEdad)
+        var celdaAltura = document.createElement("td")
+        var textAltura = document.createTextNode(cliente.altura)
+        celdaAltura.appendChild(textAltura)
+        var celdaPeso = document.createElement("td")
+        var textPeso = document.createTextNode(cliente.peso)
+        celdaPeso.appendChild(textPeso)
+        var celdaActividad = document.createElement("td")
+        var textActividad = document.createTextNode(cliente.actividad)
+        celdaActividad.appendChild(textActividad)
+        var celdaGet = document.createElement("td")
+        var textGet = document.createTextNode(cliente.get)
+        celdaGet.appendChild(textGet)
+        var celdaGer = document.createElement("td")
+        var textGer = document.createTextNode(cliente.ger)
+        celdaGer.appendChild(textGer)
+
+        fila.appendChild(celdaNombre)
+        fila.appendChild(celdaApellidos)
+        fila.appendChild(celdaSexo)
+        fila.appendChild(celdaEdad)
+        fila.appendChild(celdaAltura)
+        fila.appendChild(celdaPeso)
+        fila.appendChild(celdaActividad)
+        fila.appendChild(celdaGet)
+        fila.appendChild(celdaGer)
+        fila.classList.add('border')
+        tabla.appendChild(fila)
+
+
+
+
     }
+
 
 
 }

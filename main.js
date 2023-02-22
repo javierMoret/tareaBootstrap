@@ -1,5 +1,6 @@
 
 let listaClientes = []
+cargarDatos()
 
 
 function cargarDatos() {
@@ -26,35 +27,7 @@ function cargarDatos() {
                 'get': undefined,
                 'ger': undefined
             }
-            switch (nuevoCliente.actividad) {
-                case 'sedentaria':
-                    if (nuevoCliente.sexo == 'hombre') {
-                        coeficienteActividad = 1.3
-                    } else {
-                        coeficienteActividad = 1.3
-                    }
-                    break;
-                case 'moderada':
-                    if (nuevoCliente.sexo == 'hombre') {
-                        coeficienteActividad = 1.7
-                    } else {
-                        coeficienteActividad = 1.6
-                    }
-                    break;
-                case 'intensa':
-                    if (nuevoCliente.sexo == 'hombre') {
-                        coeficienteActividad = 2.1
-                    } else {
-                        coeficienteActividad = 1.9
-                    }
-                    break;
-            }
-            if (nuevoCliente.sexo == 'hombre') {
-                nuevoCliente.get = Math.round(66.473 + 13.751 * nuevoCliente.peso + 5.0033 * nuevoCliente.altura - 6.755 * nuevoCliente.edad)
-            } else {
-                nuevoCliente.get = Math.round(655.0955 + 9.463 * nuevoCliente.peso + 1.8496 * nuevoCliente.altura - 4.6756 * nuevoCliente.edad)
-            }
-            nuevoCliente.ger = Math.round(nuevoCliente.get * coeficienteActividad)
+            pintarCliente(nuevoCliente)
             listaClientes.push(nuevoCliente)
 
 
@@ -64,63 +37,92 @@ function cargarDatos() {
     })
 }
 
+function pintarCliente(nuevoCliente) {
+    switch (nuevoCliente.actividad) {
+        case 'sedentaria':
+            if (nuevoCliente.sexo == 'hombre') {
+                coeficienteActividad = 1.3
+            } else {
+                coeficienteActividad = 1.3
+            }
+            break;
+        case 'ligera':
+            if (nuevoCliente.sexo == 'hombre') {
+                coeficienteActividad = 1.6
+            } else {
+                coeficienteActividad = 1.5
+            }
+            break;
+        case 'moderada':
+            if (nuevoCliente.sexo == 'hombre') {
+                coeficienteActividad = 1.7
+            } else {
+                coeficienteActividad = 1.6
+            }
+            break;
+        case 'intensa':
+            if (nuevoCliente.sexo == 'hombre') {
+                coeficienteActividad = 2.1
+            } else {
+                coeficienteActividad = 1.9
+            }
+            break;
+    }
+    if (nuevoCliente.sexo == 'hombre') {
+        nuevoCliente.get = Math.round(66.473 + 13.751 * nuevoCliente.peso + 5.0033 * nuevoCliente.altura - 6.755 * nuevoCliente.edad)
+    } else {
+        nuevoCliente.get = Math.round(655.0955 + 9.463 * nuevoCliente.peso + 1.8496 * nuevoCliente.altura - 4.6756 * nuevoCliente.edad)
+    }
+    nuevoCliente.ger = Math.round(nuevoCliente.get * coeficienteActividad)
+    var tabla = document.getElementById('tabla')
+    const row = tabla.insertRow();
+    row.classList.add('text-center')
+    row.innerHTML = `
+<td>${nuevoCliente.nombre}</td>
+<td>${nuevoCliente.apellidos}</td>
+<td><span class="badge bg-primary">${nuevoCliente.sexo}</span></td>
+<td>${nuevoCliente.edad}</td>
+<td>${nuevoCliente.altura}</td>
+<td>${nuevoCliente.peso}</td>
+<td><span class="badge bg-secondary">${nuevoCliente.actividad}</span></td>
+<td>${nuevoCliente.get}</td>
+<td>${nuevoCliente.ger}</td>
+`;
+}
+
 function escribirClientes() {
     console.log(listaClientes);
 }
 
-function pintarFilas() {
-
-    var tabla = document.getElementById('tabla')
-
-    for (let i = 0; i < listaClientes.length; i++) {
-        let cliente = listaClientes[i]
-        var fila = document.createElement("tr")
-        var celdaNombre = document.createElement("td")
-        var textNombre = document.createTextNode(cliente.nombre)
-        celdaNombre.appendChild(textNombre)
-        var celdaApellidos = document.createElement("td")
-        var textApellidos = document.createTextNode(cliente.apellidos)
-        celdaApellidos.appendChild(textApellidos)
-        var celdaSexo = document.createElement("td")
-        var textSexo = document.createTextNode(cliente.sexo)
-        celdaSexo.appendChild(textSexo)
-        var celdaEdad = document.createElement("td")
-        var textEdad = document.createTextNode(cliente.edad)
-        celdaEdad.appendChild(textEdad)
-        var celdaAltura = document.createElement("td")
-        var textAltura = document.createTextNode(cliente.altura)
-        celdaAltura.appendChild(textAltura)
-        var celdaPeso = document.createElement("td")
-        var textPeso = document.createTextNode(cliente.peso)
-        celdaPeso.appendChild(textPeso)
-        var celdaActividad = document.createElement("td")
-        var textActividad = document.createTextNode(cliente.actividad)
-        celdaActividad.appendChild(textActividad)
-        var celdaGet = document.createElement("td")
-        var textGet = document.createTextNode(cliente.get)
-        celdaGet.appendChild(textGet)
-        var celdaGer = document.createElement("td")
-        var textGer = document.createTextNode(cliente.ger)
-        celdaGer.appendChild(textGer)
-
-        fila.appendChild(celdaNombre)
-        fila.appendChild(celdaApellidos)
-        fila.appendChild(celdaSexo)
-        fila.appendChild(celdaEdad)
-        fila.appendChild(celdaAltura)
-        fila.appendChild(celdaPeso)
-        fila.appendChild(celdaActividad)
-        fila.appendChild(celdaGet)
-        fila.appendChild(celdaGer)
-        fila.classList.add('border')
-        tabla.appendChild(fila)
-
-
+function crearCliente() {
+    if (
+        document.getElementById('formNombre').value
+        && document.getElementById('formApellidos').value
+        && document.getElementById('formPeso').value < 250 && document.getElementById('formPeso').value > 20
+        && document.getElementById('formAltura').value < 220 && document.getElementById('formAltura').value > 100
+        && document.getElementById('formEdad').value < 100 && document.getElementById('formEdad').value > 5
+    ) {
+        nuevoCliente = {
+            'nombre': document.getElementById('formNombre').value,
+            'apellidos': document.getElementById('formApellidos').value,
+            'sexo': document.getElementById('formSexo').value,
+            'edad': document.getElementById('formEdad').value,
+            'altura': document.getElementById('formAltura').value,
+            'peso': document.getElementById('formPeso').value,
+            'actividad': document.getElementById('formActividad').value,
+            'get': undefined,
+            'ger': undefined
+        }
+        pintarCliente(nuevoCliente)
+        document.getElementById('formNombre').value = ""
+        document.getElementById('formApellidos').value = ""
+        document.getElementById('formSexo').value = "hombre"
+        document.getElementById('formEdad').value = ""
+        document.getElementById('formAltura').value = ""
+        document.getElementById('formPeso').value = ""
+        document.getElementById('formActividad').value = "sedentaria"
 
 
     }
 
-
-
 }
-

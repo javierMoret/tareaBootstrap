@@ -3,75 +3,19 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Listado De clientes</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Listado de clientes</title>
 </head>
 
-<<<<<<< HEAD
 <body>
-    <div class="vh-100 row justify-content-center align-items-center">
-        <div class="h-auto text-center w-75">
-            <div class="text-center h1 mb-3">Listado de Clientes</div>
-            <table class="table" id="tabla">
-                <!-- <thead>
-                    <tr class="text-white bg-primary">
-                        <th class="border border-white col-2">Nombre</th>
-                        <th class="border border-white col-2">Apellidos</th>
-                        <th class="border border-white col-1">Sexo</th>
-                        <th class="border border-white col-1">Edad</th>
-                        <th class="border border-white col-1">Altura</th>
-                        <th class="border border-white col-1">Peso</th>
-                        <th class="border border-white col-2">Actividad</th>
-                        <th class="border border-white col-1">GET (kcal)</th>
-                        <th class="border border-white col-1">GER (kcal)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th class="border">1</th>
-                        <td class="border">Mark</td>
-                        <td class="border">Otto</td>
-                        <td class="border">@mdo</td>
-                        <td class="border">Mark</td>
-                        <td class="border">Otto</td>
-                        <td class="border">Mark</td>
-                        <td class="border">Otto</td>
-                        <td class="border">Otto</td>
-                    </tr>
-                    <tr>
-                        <th class="border">1</th>
-                        <td class="border">Mark</td>
-                        <td class="border">Otto</td>
-                        <td class="border">@mdo</td>
-                        <td class="border">Mark</td>
-                        <td class="border">Otto</td>
-                        <td class="border">Mark</td>
-                        <td class="border">Otto</td>
-                        <td class="border">Otto</td>
-                    </tr>
-                    <tr>
-                        <th class="border">1</th>
-                        <td class="border">Mark</td>
-                        <td class="border">Otto</td>
-                        <td class="border">@mdo</td>
-                        <td class="border">Mark</td>
-                        <td class="border">Otto</td>
-                        <td class="border">Mark</td>
-                        <td class="border">Otto</td>
-                        <td class="border">Otto</td>
-                    </tr>
-                </tbody> -->
-            </table>
-            <button onclick="cargarDatos()">Datos</button>
-            <button onclick="escribirClientes()">Escribir</button>
-            <button onclick="pintarFilas()">Añadir row</button>
-=======
-<body style="background-color: aliceblue;">
 
-    <div class="container yx-auto position-absolute top-50 start-50 translate-middle">
+    <div class="container position-absolute top-50 start-50 yx-auto translate-middle">
         <h1 class="text-center mb-4">Listado de clientes</h1>
 
-        <table class="table table-bordered table-striped table-hover mb-3">
+        <table id="tabla" class="table table-bordered table-striped table-hover mb-3">
             <thead>
                 <tr class="bg-primary text-white text-center">
                     <th scope="col">Nombre</th>
@@ -93,115 +37,77 @@
 
         <div class="text-center">
 
-            <!-- Abre modal modal -->
             <button type="button" class="btn btn-primary rounded-0 text-white border-top border-start col-2 me-3 py-1 "
-                data-bs-toggle="modal" data-bs-target="#exampleModal">Nuevo
+                data-bs-toggle="modal" data-bs-target="#modalCliente">Nuevo
                 cliente</button>
-            <button type="submit" class=" btn btn-secondary rounded-0 text-white border-top border-start col-2 py-1"
-                id="btnAñadir">Cargar datos externos</button>
->>>>>>> ad3e1e06209d3ffb5d203177a208a043c0b61642
+            <button type="submit" onclick="cargarDatos()"
+                class=" btn btn-secondary rounded-0 text-white border-top border-start col-2 py-1" id="btnAñadir">Cargar
+                datos externos</button>
         </div>
     </div>
 
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalCliente" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header bg-primary text-white">
-                    <h1 class="modal-title fs-5 " id="exampleModalLabel">Nuevo cliente</h1>
-                    <button type="button" class="btn-close" id="equisCerrar" aria-label="Close"></button>
+                <div class="modal-header  bg-primary">
+                    <h5 class="modal-title text-white" id="staticBackdropLabel">Nuevo cliente</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-
-
-                    <form class="row g-3 needs-validation">
-                        <div class="col-12">
-                            <label for="nombre" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" placeholder="Nombre" required>
-                            <div class="invalid-feedback">
-                                Introduce un nombre
-                            </div>
-                            <div class="valid-feedback">
-                                Perfecto!
-                            </div>
+                    <div class="mb-3">
+                        <label class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="formNombre" placeholder="Nombre" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Apellidos</label>
+                        <input type="text" class="form-control" id="formApellidos" placeholder="Apellidos" required>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 mb-3">
+                            <label class="form-label">Sexo</label>
+                            <select class="form-select" aria-label="Default select example" id="formSexo" required>
+                                <option value="hombre" selected>Hombre</option>
+                                <option value="mujer">Mujer</option>
+                              </select>
                         </div>
-                        <div class="col-12">
-                            <label for="apellidos" class="form-label">Apellidos</label>
-                            <input type="text" class="form-control" id="apellidos" placeholder="Apellidos" required>
-                            <div class="invalid-feedback">
-                                Introduce un apellido
-                            </div>
-                            <div class="valid-feedback">
-                                Perfecto!
-                            </div>
+                        <div class="col-6 mb-3">
+                            <label class="form-label">Nivel de actividad</label>
+                            <select class="form-select" aria-label="Default select example" id="formActividad" required>
+                                <option value="sedentaria" selected>Sedentaria</option>
+                                <option value="ligera">Ligera</option>
+                                <option value="moderada">Moderada</option>
+                                <option value="intensa">Intensa</option>
+                              </select>
                         </div>
-                        <div class="col-md-6">
-                            <label for="sexo" class="form-label">Sexo</label>
-                            <select id="sexo" class="form-select">
-                                <option>Hombre</option>
-                                <option>Mujer</option>
-                            </select>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 mb-3">
+                            <label class="form-label">Edad</label>
+                            <input type="number" class="form-control" id="formEdad" placeholder="35" required>
                         </div>
-                        <div class="col-md-6">
-                            <label for="actividad" class="form-label">Nivel de actividad</label>
-                            <select id="actividad" class="form-select">
-                                <option>Sedentaria</option>
-                                <option>Moderada</option>
-                                <option>Intensa</option>
-                            </select>
+                        <div class="col-4 mb-3">
+                            <label class="form-label">Peso (kg)</label>
+                            <input type="number" class="form-control" id="formPeso" placeholder="45" required>
                         </div>
-
-                        <div class="col-md-4">
-                            <label for="inputEdad" class="form-label">Edad</label>
-                            <input type="number" class="form-control" id="edad" required min="18" max="99"
-                                placeholder="35">
-                            <div class="invalid-feedback">
-                                La edad mínima es 18
-                            </div>
-                            <div class="valid-feedback">
-                                Perfecto!
-                            </div>
+                        <div class="col-4 mb-3">
+                            <label class="form-label">Altura (cm)</label>
+                            <input type="number" class="form-control" id="formAltura" placeholder="165" required>
                         </div>
-
-                        <div class="col-md-4">
-                            <label for="inputPeso" class="form-label">Peso (kg)</label>
-                            <input type="number" class="form-control" id="peso" required min="40" max="200"
-                                placeholder="45">
-                            <div class="invalid-feedback">
-                                Debe pesar entre 20 y 200
-                            </div>
-                            <div class="valid-feedback">
-                                Perfecto!
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <label for="inputAltura" class="form-label">Altura (cm)</label>
-                            <input type="number" class="form-control" id="altura" required min="140" max="220"
-                                placeholder="165">
-                            <div class="invalid-feedback">
-                                Debe medir entre 100 y 250
-                            </div>
-                            <div class="valid-feedback">
-                                Perfecto!
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" id="cancelar">Cancelar</button>
-                            <button class="btn btn-primary" type="submit" id="clienteGuardado">Guardar cliente</button>
-                        </div>
-                    </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="crearCliente()">Guardar cliente</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <script src="main.js"></script>
 </body>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-    crossorigin="anonymous"></script>
-
-<script src="main.js"></script>
 
 </html>

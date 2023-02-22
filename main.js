@@ -55,3 +55,49 @@ function addRow(tabla) {
 
 }
 
+
+//Cierra boton "equis"
+document.querySelector("#equisCerrar").addEventListener("click", function () {
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+            form.classList.remove('was-validated')
+
+        })
+
+    event.preventDefault()
+    const modal = bootstrap.Modal.getInstance(document.querySelector("#exampleModal"));
+    modal.hide();
+
+    setTimeout(() => {
+        document.querySelector("#nombre").value = "";
+        document.querySelector("#apellidos").value = "";
+        document.querySelector("#edad").value = "";
+        document.querySelector("#altura").value = "";
+        document.querySelector("#peso").value = "";
+
+    }, 1000);
+})
+
+//Cierra "cancelar"
+document.querySelector("#cancelar").addEventListener("click", function () {
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+            form.classList.remove('was-validated')
+
+        })
+
+    event.preventDefault()
+    const modal = bootstrap.Modal.getInstance(document.querySelector("#exampleModal"));
+    modal.hide();
+
+    setTimeout(() => {
+        document.querySelector("#nombre").value = "";
+        document.querySelector("#apellidos").value = "";
+        document.querySelector("#edad").value = "";
+        document.querySelector("#altura").value = "";
+        document.querySelector("#peso").value = "";
+
+    }, 1000);
+})
